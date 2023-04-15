@@ -2,20 +2,24 @@ import { createContext, useState, useEffect} from "react";
 import { tasks as data } from "../data/task";
 export const TaskContext = createContext();
 
+let counter = 0;
+
 export function TaskContextProvider(props) {
     //con este nombre le indicamos a React que sera el componente que almacena el resto de componentes
 
     const [tasks, setTasks] = useState([]);
-
     function createTask(task) {
+        
         setTasks([
             ...tasks,
             {
                 title: task.title,
-                id: tasks.length,
+                id: counter,
                 description: task.description,
             },
         ]);
+        counter++;
+        console.log(counter)
     }
 
     useEffect(() => {
